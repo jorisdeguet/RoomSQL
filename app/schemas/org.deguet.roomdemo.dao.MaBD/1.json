@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "381651432468f6b4357d7ffa5815e74b",
+    "identityHash": "42aab6f3aa50f10465baa0452d234088",
     "entities": [
       {
         "tableName": "DemoAlbum",
@@ -41,12 +41,65 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "DemoPiste",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `nom` TEXT, `albumId` INTEGER, FOREIGN KEY(`albumId`) REFERENCES `DemoAlbum`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nom",
+            "columnName": "nom",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "albumId",
+            "columnName": "albumId",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_DemoPiste_albumId",
+            "unique": false,
+            "columnNames": [
+              "albumId"
+            ],
+            "createSql": "CREATE  INDEX `index_DemoPiste_albumId` ON `${TABLE_NAME}` (`albumId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "DemoAlbum",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "albumId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"381651432468f6b4357d7ffa5815e74b\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"42aab6f3aa50f10465baa0452d234088\")"
     ]
   }
 }
