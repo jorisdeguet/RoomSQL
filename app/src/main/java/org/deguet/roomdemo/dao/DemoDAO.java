@@ -17,10 +17,16 @@ public abstract class DemoDAO {
     public abstract Long creerAlbum(DemoAlbum album);
 
     @Insert
+    public abstract List<Long> creerAlbums(List<DemoAlbum> albums);
+
+    @Insert
     public abstract Long creerPiste(DemoPiste piste);
 
     @Query("SELECT * FROM DemoAlbum")
     public abstract List<DemoAlbum> tousLesAlbums();
+
+    @Query("SELECT * FROM DemoAlbum WHERE artiste = :art")
+    public abstract List<DemoAlbum> parArtiste(String art);
 
     @Transaction
     public Long creerAlbumPistes(DemoAlbum a, List<DemoPiste> ps){

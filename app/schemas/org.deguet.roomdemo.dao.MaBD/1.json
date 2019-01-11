@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "42aab6f3aa50f10465baa0452d234088",
+    "identityHash": "ce81810d9e4806e6903426b36017d9bd",
     "entities": [
       {
         "tableName": "DemoAlbum",
@@ -39,7 +39,16 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_DemoAlbum_artiste",
+            "unique": false,
+            "columnNames": [
+              "artiste"
+            ],
+            "createSql": "CREATE  INDEX `index_DemoAlbum_artiste` ON `${TABLE_NAME}` (`artiste`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -99,7 +108,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"42aab6f3aa50f10465baa0452d234088\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ce81810d9e4806e6903426b36017d9bd\")"
     ]
   }
 }
