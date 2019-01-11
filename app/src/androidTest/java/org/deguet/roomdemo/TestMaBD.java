@@ -38,9 +38,9 @@ public class TestMaBD {
             a.artiste = "Joris";
             a.dateDeSortie = new Date();
             a.nom = "album" + i;
-            bd.dao().creerAlbum(a);
+            bd.dao().creerAlbum(a).blockingGet();
         }
-        List<DemoAlbum> albums = bd.dao().tousLesAlbums();
+        List<DemoAlbum> albums = bd.dao().tousLesAlbums().blockingGet();
         assertEquals(10, albums.size());
         bd.close();
     }
@@ -55,9 +55,9 @@ public class TestMaBD {
             a.artiste = "Joris";
             a.dateDeSortie = new Date();
             a.nom = "album" + i;
-            bd.dao().creerAlbum(a);
+            bd.dao().creerAlbum(a).blockingGet();
         }
-        List<DemoAlbum> albums = bd.dao().tousLesAlbums();
+        List<DemoAlbum> albums = bd.dao().tousLesAlbums().blockingGet();
         assertEquals(100, albums.size());
         bd.close();
     }
@@ -78,9 +78,9 @@ public class TestMaBD {
             pistes.add(piste);
         }
 
-        bd.dao().creerAlbumPistes(a, pistes);
+        bd.dao().creerAlbumPistes(a, pistes).blockingGet();
 
-        List<DemoAlbum> albums = bd.dao().tousLesAlbums();
+        List<DemoAlbum> albums = bd.dao().tousLesAlbums().blockingGet();
         assertEquals(1, albums.size());
         bd.close();
     }
@@ -101,13 +101,13 @@ public class TestMaBD {
             album.nom = "album"+i;
             liste.add(album);
         }
-        bd.dao().creerAlbums(liste);
+        bd.dao().creerAlbums(liste).blockingGet();
         long b = System.currentTimeMillis();
         Log.i("PERFORMANCE", "Fini creation " + (b-a));
         // accéder à un album en particulier
         Random random = new Random();
         for (int i = 0 ; i < 100 ; i++) {
-            List<DemoAlbum> l = bd.dao().parArtiste("Joris"+ random.nextInt(size));
+            List<DemoAlbum> l = bd.dao().parArtiste("Joris"+ random.nextInt(size)).blockingGet();
         }
         long c = System.currentTimeMillis();
         Log.i("PERFORMANCE", "Fini les requêtes " + (c-b));
